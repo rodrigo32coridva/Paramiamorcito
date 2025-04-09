@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Amorchito</title>
+    <link rel="icon" href="miamorcito.ico">
+    <style>
+        /* Estilo para el cuerpo */
+        body {
+            background: linear-gradient(to right, #ff7eb3, #ff66b2);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInBackground 3s ease-in-out;
+        }
+
+        /* Animación de entrada para el fondo */
+        @keyframes fadeInBackground {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Estilo para el título */
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        /* Animación para el texto */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Estilo para el botón */
+        button {
+            background-color: #ff66b2;
+            color: white;
+            font-size: 18px;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Efecto hover para el botón */
+        button:hover {
+            background-color: #ff3385;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animación para el botón */
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Estilo para el emoji de corazón */
+        .heart {
+            font-size: 6em;
+            margin-top: 20px;
+            animation: heartBeat 1.5s infinite ease-in-out;
+        }
+
+        /* Animación de latido para el corazón */
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Hola, mi amorcito! ❤️</h1>
+    <div class="heart">💖</div>
+    <button onclick="startLoading()">Ir a la siguiente página</button>
+
+    <script>
+        function startLoading() {
+            // Redirige a carga.html después de un pequeño delay
+            setTimeout(function() {
+                window.location.href = 'carga.html';  // redirige a la página de carga
+            }, 1000); // 1 segundo de espera
+        }
+    </script>
+</body>
+</html>

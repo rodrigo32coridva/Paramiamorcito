@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te Amo, Mi Amorcito</title>
+    <link rel="icon" href="miamorcito.ico">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7eb3, #ff66b2);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 4em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 5s ease-in-out 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .heart {
+            font-size: 5em;
+            animation: pulse 1.5s infinite;
+            margin-top: 30px;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Te amo, mi amorcito! ❤️</h1>
+    <p>Gracias por esperar. ¡TE AMOOOOOO MI PRINCESA HERMOSAAAA!!!!!!</p>
+    <div class="heart">💖</div>
+    <canvas id="c"></canvas>
+
+    <script>
+        var c = document.getElementById('c');
+        var a = c.getContext('2d');
+        var e = [];
+        var h = [];
+        var O = c.width = window.innerWidth;
+        var Q = c.height = window.innerHeight;
+
+        var v = 32;
+        var M = Math;
+        var R = M.random;
+        var C = M.cos;
+        var Y = 6.3;
+        
+        for (var i = 0; i < Y; i += 0.2) {
+            h.push([
+                O / 2 + 180 * M.pow(M.sin(i), 3),
+                Q / 2 + 10 * (-(15 * C(i) - 5 * C(2 * i) - 2 * C(3 * i) - C(4 * i)))
+            ]);
+        }
+
+        i = 0;
+        while (i < v) {
+            var x = R() * O;
+            var y = R() * Q;
+            var H = i / v * 80 + 280;
+            var S = R() * 40 + 60;
+            var B = R() * 60 + 20;
+
+            var f = [];
+            var k = 0;
+            while (k < v) {
+                f[k++] = {
+                    x: x,
+                    y: y,
+                    X: 0,
+                    Y: 0,
+                    R: (1 - k / v) + 1,
+                    S: R() + 1,
+                    q: ~~(R() * v),
+                    D: i % 2 * 2 - 1,
+                    F: R() * 0.2 + 0.7,
+                    f: "hsla(" + ~~H + "," + ~~S + "%," + ~~B + "%,.1)"
+                };
+            }
+
+            e[i++] = f;
+        }
+
+        function render(particle) {
+            a.fillStyle = particle.f;
+            a.beginPath();
+            a.arc(particle.x, particle.y, particle.R, 0, Y, 1);
+            a.closePath();
+            a.fill();
+        }
+
+        function loop() {
+            a.fillStyle = "rgba(0,0,0,.2)";
+            a.fillRect(0, 0, O, Q);
+
+            var i = v;
+            while (i--) {
+                var f = e[i];
+                var u = f[0];
+                var q = h[u.q];
+                var D = u.x - q[0];
+                var E = u.y - q[1];
+                var G = M.sqrt((D * D) + (E * E));
+
+                if (G < 10) {
+                    if (R() > .95) {
+                        u.q = ~~(R() * v);
+                    } else {
+                        if (R() > .99) u.D *= -1;
+                        u.q += u.D;
+                        u.q %= v;
+                        if (u.q < 0) u.q += v;
+                    }
+                }
+
+                u.X += -D / G * u.S;
+                u.Y += -E / G * u.S;
+                u.x += u.X;
+                u.y += u.Y;
+
+                render(u);
+
+                u.X *= u.F;
+                u.Y *= u.F;
+
+                var k = 0;
+                while (k < v - 1) {
+                    var T = f[k];
+                    var N = f[++k];
+                    N.x -= (N.x - T.x) * .7;
+                    N.y -= (N.y - T.y) * .7;
+                    render(N);
+                }
+            }
+        }
+
+        (function doit() {
+            requestAnimationFrame(doit);
+            loop();
+        })();
+    </script>
+</body>
+</html>

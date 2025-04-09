@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargando...</title>
+    <link rel="icon" href="miamorcito.ico">
+    <style>
+        body {
+            background-color: pink;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .heart {
+            font-size: 50px;
+            animation: pulse 1s ease infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .loader-container {
+            margin-top: 50px;
+            width: 80%;
+            max-width: 500px;
+            height: 20px;
+            background-color: #ffffff;
+            border-radius: 25px;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .loader-bar {
+            width: 0;
+            height: 100%;
+            background-color: #ff66b2;
+            border-radius: 25px;
+        }
+
+        .loading-text {
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart">❤️</div>
+    <p class="loading-text" id="loadingText">Cargando... por favor espera</p>
+    <div class="loader-container">
+        <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <script>
+        const loaderBar = document.getElementById('loaderBar');
+        const loadingText = document.getElementById('loadingText');
+        let progress = 0;
+
+        function updateProgressBar() {
+            progress += 1;
+            loaderBar.style.width = progress + '%';
+
+            if (progress === 25) {
+                loadingText.textContent = 'Ya casi mi amorcito...';
+            } else if (progress === 50) {
+                loadingText.textContent = 'Falta poquito mi reina...';
+            } else if (progress === 75) {
+                loadingText.textContent = 'Mira a la izquierda... ya falta poco!';
+            }
+
+            if (progress < 100) {
+                setTimeout(updateProgressBar, 100);  // Hace que la barra se mueva más lentamente
+            } else {
+                setTimeout(function() {
+                    window.location.href = 'te-amomiamorcito.html';
+                }, 1000);
+            }
+        }
+
+        updateProgressBar();
+    </script>
+</body>
+</html>
